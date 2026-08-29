@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhaseGuard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- project title-->
+    <div class="Header">
+        <h1>PhaseGuard</h1>
+        <p>Electrical fault classifier dashboard</p><br>
+        <p>A machine learning powered web app that detects and classifies electrical faults on a 3-phase power line in real time.</p>
+    </div>
+
+    <div class="AboutCanvas">
+        <!-- Project Description-->
+        <div class="About-box">
+            <h3> Project Description</h3>
+            <p> PhaseGuard classifies electrical faults on a 3-phase power line using a randomforest model trained on current and voltage readings.</p> 
+            <br>
+            <p> Move the sliders to simulate live readings and see the model's live prediction.</p>
+            <br>
+            <p>Predictions update instantly as you move any slider, so no prediction button needed.</p><br>
+            <p>Note: current values reflect real sensor readings; voltage values are normalized (per-model convention), so they appear as small decimals rather than real volts.</p>
+    
+            
+        </div>
+        <!-- Waveform-->
+        <div class="Waveform-box">
+            <div class="waveform-top-row">
+                <div class="text">
+                    <h3> Waveform</h3>
+                <p> Current</p>
+                </div>
+                <button id="resetBtn">Reset To Default</button> 
+            </div>
+            <p class="canvas-note">Default values are set for clear visual display only — not a real "No Fault" reading.</p>
+            <canvas id="waveform" width="600" height="300"></canvas>
+        </div>
+        
+
+    </div>
+    
+    
+    
+  
+    
+    <!-- reset button to default starting position --> 
+
+     <!-- Inputs-->
+    <div class="Inputs">
+        <div class="Current-Box">
+            <h2>Current Inputs</h2>
+            <div class="Current-Slider">
+                <label for ="Ia"> Ia: <span id="IaDisplay">200</span></label>
+                <input type="range" class="input" id="Ia" min="-900" max="900"  value="200">
+                <div class="Range-Labels">
+                    <span>-900</span>
+                    <span>900</span>
+                </div>
+            </div>
+            <div class="Current-Slider">
+                <label for ="Ib"> Ib: <span id="IbDisplay">200</span></label>
+                <input type="range" class="input" id="Ib" min="-900" max="900"  value="200">
+                <div class="Range-Labels">
+                    <span>-900</span>
+                    <span>900</span>
+                </div>
+            </div>
+            <div class="Current-Slider">
+                <label for ="Ic"> Ic:<span id="IcDisplay">200</span></label>
+                <input type="range" class="input" id="Ic" min="-900" max="900"  value="200">
+                <div class="Range-Labels">
+                    <span>-900</span>
+                    <span>900</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="Voltage-Box">
+            <h2> Voltage Inputs</h2>
+            <div class="Voltage-Slider">
+                <label for ="Va"> Va:<span id="VaDisplay">0.1</span></label>
+                <input type="range" class="input" id="Va" min="-0.65" max="0.65" step="0.01" value="0.1">
+                <div class="Range-Labels">
+                    <span>-0.65</span>
+                    <span>0.65</span>
+                </div>
+            </div>
+            <div class="Voltage-Slider">
+                <label for ="Vb"> Vb:<span id="VbDisplay">0.1</span></label>
+                <input type="range" class="input" id="Vb" min="-0.65" max="0.65" step="0.01" value="0.1">
+                <div class="Range-Labels">
+                    <span>-0.65</span>
+                    <span>0.65</span>
+                </div>
+            </div>
+            <div class="Voltage-Slider">
+                <label for ="Vc"> Vc:<span id="VcDisplay">0.1</span></label>
+                <input type="range" class="input" id="Vc" min="-0.65" max="0.65" step="0.01" value="0.1">
+                <div class="Range-Labels">
+                    <span>-0.65</span>
+                    <span>0.65</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Predtiction Box-->
+    <div id="ResultBox">
+        <h3> Prediction Results</h3>
+        <div class="result-description">
+            <div class="result-item">
+                <p class="label"> Fault Type</p>
+                <p class="value" id="FaultType">--</p>
+            </div>
+            <div class="result-item">
+                <p class="label"> Fault Label</p>
+                <p class="value" id="FaultLabel">--</p>
+            </div>
+            <div class="result-item">
+                <p class="label"> Confidence</p>
+                <p class="value" id="ConfValue">--</p>
+            </div>
+        </div>
+        <div class="phase-status-row">
+            <p class="label">Phase Status:</p>
+            <div class="Phase-Pill">
+                <span class="pill" id="PhA"> Phase A:--</span>
+                <span class="pill" id="PhB"> Phase B:--</span>
+                <span class="pill" id="PhC"> Phase C:--</span>
+                <span class="pill" id="PhG"> Ground:--</span>               
+            </div>
+        </div>
+        
+    </div>
+    <div class="end-note">
+        <p class="note">Note: confidence may look moderate (30-50%) with slider inputs, since sliders can only approximate exact values. On the original test dataset, the model achieved 98-100% accuracy and confidence — this reflects input precision, not model quality.</p>
+        <p class="note">Model limitations: trained on 6 fault types only (No Fault, AG, ABG, BC, ABC, ABCG); ABC and ABCG faults can be harder to distinguish due to their similar three-phase symmetry.</p>
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
