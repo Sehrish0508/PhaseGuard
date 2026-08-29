@@ -4,6 +4,7 @@
 
 Built as a capstone project combining machine learning (scikit-learn), a FastAPI backend, and a hand-coded vanilla HTML/CSS/JS frontend with live Canvas 2D waveform visualization.
 
+**Live demo:** https://sehrish0508.github.io/PhaseGuard/
 ---
 
 ## What it does

@@ -249,3 +249,13 @@ canvas{
         gap: 8px;
     }
 }
+
+.githublink{
+    font-size: 13px;
+    text-align: center;
+    margin-top: 20px;
+}
+.githublink a{
+    text-decoration: none;
+    color: #007ea7;
+}
