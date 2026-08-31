@@ -14,35 +14,76 @@
         <p>A machine learning powered web app that detects and classifies electrical faults on a 3-phase power line in real time.</p>
     </div>
 
-    <div class="AboutCanvas">
+    
         <!-- Project Description-->
-        <div class="About-box">
-            <h3> Project Description</h3>
-            <p> PhaseGuard classifies electrical faults on a 3-phase power line using a randomforest model trained on current and voltage readings.</p> 
-            <br>
-            <p> Move the sliders to simulate live readings and see the model's live prediction.</p>
-            <br>
-            <p>Predictions update instantly as you move any slider, so no prediction button needed.</p><br>
-            <p>Note: current values reflect real sensor readings; voltage values are normalized (per-model convention), so they appear as small decimals rather than real volts.</p>
-    
-            
-        </div>
-        <!-- Waveform-->
-        <div class="Waveform-box">
-            <div class="waveform-top-row">
-                <div class="text">
-                    <h3> Waveform</h3>
-                <p> Current</p>
-                </div>
-                <button id="resetBtn">Reset To Default</button> 
-            </div>
-            <p class="canvas-note">Default values are set for clear visual display only — not a real "No Fault" reading.</p>
-            <canvas id="waveform" width="600" height="300"></canvas>
-        </div>
         
+    <div class="About-box">
+        <div class="about-toggle">
+        <p class="toggle-heading">Navigate</p>
+        <label class="radio-option">
+            <input type="radio" name="aboutSelect" id="btnAbout" checked>
+            About the Project
+        </label>
+        <label class="radio-option">
+            <input type="radio" name="aboutSelect" id="btnValue">
+            Industry Impact
+        </label>
+        <p class="toggle-tagline">PhaseGuard uses machine learning to instantly classify electrical faults on 3-phase power lines.</p>
+        </div>
 
+        <div class="about-content">
+           <div class="about-tab" id="aboutTab">
+                <h3>Project Description</h3>
+                <p>PhaseGuard is a machine learning model that identifies the type of fault occurring on a 3-phase power line — instantly, from live current and voltage readings, without needing a technician to manually inspect the line.</p>
+                <br>
+                <p>It's trained on real fault data and classifies six common fault types, from single-line faults to full three-phase faults.</p>
+                <br>
+                <p>Move the sliders below to simulate live readings and watch the model predict in real time — no button needed, predictions update instantly.</p>
+                <br>
+                <p>Note: current values reflect real sensor readings; voltage values are normalized (per-model convention), so they appear as small decimals rather than real volts.</p>
+            </div>
+        
+            <div class="about-tab" id="valueTab" style="display:none;">
+                <h3>Industry Impact</h3>
+                <p>When something goes wrong on a power line today, workers often have to physically drive out and manually check different points along the line, one by one, until they find the problem. This can take anywhere from a few hours to a couple of days.</p>
+                <br>
+                <p>PhaseGuard does this same job in under a second — just from live current and voltage readings, no driving around required.</p>
+
+                <p class="value-note">Time and cost saved for a single small transmission line:</p>
+                <div class="value-cards">
+                    <div class="value-card">
+                        <p class="value-card-label">Time Saved (per fault)</p>
+                        <p class="value-card-number">~3 hours</p>
+                    </div>
+                    <div class="value-card">
+                        <p class="value-card-label">Cost Saved (per fault)</p>
+                        <p class="value-card-number">~$3,600</p>
+                 </div>
+        </div>
+
+                <p class="value-note">Applied across a mid-size regional utility (~100 grid stations, roughly 1,500 lines):</p>
+            <div class="value-cards">
+                 <div class="value-card">
+                    <p class="value-card-label">Time Saved Annually</p>
+                    <p class="value-card-number">45,000–67,500 hrs</p>
+                </div>
+            <div class="value-card">
+                <p class="value-card-label">Cost Saved Annually</p>
+                <p class="value-card-number">$54M–$81M</p>
+        </div>
     </div>
+
+    <p class="value-note">That's equivalent to over 5 years of continuous, round-the-clock work saved every year.</p>
+
+    <p class="value-note">For scale, power outages cost U.S. electricity customers over $121 billion in 2024 (U.S. Department of Energy). Faster, automated fault detection is one of several approaches the industry is exploring to help address that cost.</p>
+</div>
+
+       
+    </div>
+
+</div>
     
+         
      <!-- Inputs-->
     <div class="Inputs">
         <div class="Current-Box">
@@ -102,36 +143,60 @@
         </div>
     </div>
     
-    <!-- Predtiction Box-->
-    <div id="ResultBox">
-        <h3> Prediction Results</h3>
-        <div class="result-description">
-            <div class="result-item">
-                <p class="label"> Fault Type</p>
-                <p class="value" id="FaultType">--</p>
+<!-- New Waveform and prediction box Row-->
+    <div class="Waveform-prediction-row">
+        <!-- Waveform-->
+        <div class="Waveform-box">
+            <div class="waveform-top-row">
+                <div class="text">
+                    <h3> Waveform</h3>
+                <p> Current</p>
+                </div>
+                <button id="resetBtn">Reset To Default</button> 
             </div>
-            <div class="result-item">
-                <p class="label"> Fault Label</p>
-                <p class="value" id="FaultLabel">--</p>
-            </div>
-            <div class="result-item">
-                <p class="label"> Confidence</p>
-                <p class="value" id="ConfValue">--</p>
-            </div>
+            <p class="canvas-note">Default values are set for clear visual display only — not a real "No Fault" reading.</p>
+            <canvas id="waveform" width="600" height="300"></canvas>
         </div>
-        <div class="phase-status-row">
-            <p class="label">Phase Status:</p>
-            <div class="Phase-Pill">
-                <span class="pill" id="PhA"> Phase A:--</span>
-                <span class="pill" id="PhB"> Phase B:--</span>
-                <span class="pill" id="PhC"> Phase C:--</span>
-                <span class="pill" id="PhG"> Ground:--</span>               
+        <!-- Predtiction Box-->
+        <div id="ResultBox">
+            <h3 id="Prediction-heading"> Prediction Results</h3>
+            <div class="result-description">
+                <div class="result-item">
+                    <p class="label"> Fault Type</p>
+                    <p class="value" id="FaultType">--</p>
+                </div>
+                <div class="result-item">
+                    <p class="label"> Fault Label</p>
+                    <p class="value" id="FaultLabel">--</p>
+                </div>
+                <div class="result-item">
+                    <p class="label"> Confidence</p>
+                    <p class="value" id="ConfValue">--</p>
+                </div>
             </div>
+            <div class="phase-status-row">
+                <p class="label">Phase Status:</p>
+                <div class="Phase-Pill">
+                    <span class="pill" id="PhA"> Phase A:--</span>
+                    <span class="pill" id="PhB"> Phase B:--</span>
+                    <span class="pill" id="PhC"> Phase C:--</span>
+                    <span class="pill" id="PhG"> Ground:--</span>               
+                </div>
+            </div>
+            <p class="note1">Note: confidence may look moderate (30-50%) with slider inputs, since sliders can only approximate exact values. On the original test dataset, the model achieved 98-100% accuracy and confidence — this reflects input precision, not model quality.</p>
         </div>
         
+        
     </div>
+
+
+
+    
+        
+
+    
+        
     <div class="end-note">
-        <p class="note">Note: confidence may look moderate (30-50%) with slider inputs, since sliders can only approximate exact values. On the original test dataset, the model achieved 98-100% accuracy and confidence — this reflects input precision, not model quality.</p>
         <p class="note">Model limitations: trained on 6 fault types only (No Fault, AG, ABG, BC, ABC, ABCG); ABC and ABCG faults can be harder to distinguish due to their similar three-phase symmetry.</p>
     </div>
     <!--  Adding Footer -->

@@ -18,8 +18,24 @@ function scaleValue(value, orgMin, orgMax, newMin, newMax){
     return scaledVal;
 }
 
+// radio buttons and their fuction
+const btnAbout = document.querySelector("#btnAbout");
+const btnValue = document.querySelector("#btnValue");
+const aboutTab = document.querySelector("#aboutTab");
+const valueTab = document.querySelector("#valueTab");
 
-// ============== will change it now 
+btnAbout.addEventListener("change", () => {
+    aboutTab.style.display = "block";
+    valueTab.style.display = "none";
+});
+
+btnValue.addEventListener("change", () => {
+    aboutTab.style.display = "none";
+    valueTab.style.display = "block";
+});
+
+// reading Input values from UI
+
 const IaSlider= document.querySelector("#Ia");
 const IbSlider= document.querySelector("#Ib");
 const IcSlider= document.querySelector("#Ic");
@@ -27,7 +43,7 @@ const VaSlider= document.querySelector("#Va");
 const VbSlider= document.querySelector("#Vb");
 const VcSlider= document.querySelector("#Vc");
 
-
+// adding actions to input values
 IaSlider.addEventListener("input", ()=>{
     console.log("I am inside Ia event listener!");
     let IaVal=parseFloat(IaSlider.value);
