@@ -314,7 +314,6 @@ canvas{
 
 /* making the UI responsive */
 @media (max-width: 700px) {
-    .AboutCanvas,
     .Inputs,
     .result-description {
         flex-direction: column;
@@ -346,6 +345,23 @@ canvas{
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+    }
+    .About-box{
+        flex-direction: column;
+    }
+    .about-toggle{
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .toggle-tagline{
+        width: 100%;
+    }
+    .Waveform-prediction-row{
+        flex-direction: column;
+    }
+    .value-cards{
+        flex-direction: column;
     }
 }
 
